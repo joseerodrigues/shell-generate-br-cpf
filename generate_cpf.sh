@@ -9,12 +9,19 @@ fi
 
 first_three_digits=$1
 
+generate_random_digits() {
+    # Generate six random digits (0-9)
+    for i in {1..6}; do
+        echo -n $(( RANDOM % 10 ))
+    done
+}
+
 generate_cpf() {
     # Start with the provided first three digits
     local cpf="${first_three_digits}"
 
-    # Generate the next 6 random digits
-    local random_digits=$(shuf -i 000000-999999 -n 1)
+    # Append 6 random digits
+    local random_digits=$(generate_random_digits)
     cpf+="${random_digits}"
 
     # Calculate the first verifier digit
